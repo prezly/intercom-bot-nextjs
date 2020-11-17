@@ -14,6 +14,7 @@ export default async (req, res) => {
     res.status(200).end();
   }
 
+
   if (request_body.type && request_body.type === 'notification_event' && request_body.topic === 'conversation.admin.closed') {
     await handleIntercomConversationClosed(request_body.data);
 
