@@ -1,30 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org/) project that will add a note whenever a conversation is tagged.
+
+## Use Case
+
+[Prezly](https://www.prezly.com) uses intercom for Customer Support. Depending on the type of question our support agents need to handle the case differently.
+This project helps with that as a note is created on the conversation with a summary of the procedure and more information.
+
+* Conversation is tagged in intercom (type_bug, type_feature,...)
+* Look if there is additional information to post (template by tag_name)
+* Add a note to the conversation with links to procedures or help
 
 ## Getting Started
 
-First, run the development server:
+Copy .env.example to .env.production
+Fill in .ENV variables (find intercom key at https://app.intercom.com/a/apps/[APP_ID]/developer-hub)
+Deploy to vercel
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+`vercel --prod`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Templates
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+All templates live in `/public/templates` with an example type_bug template.
 
-## Learn More
+The name of the template needs to match the tag_name (in intercom) exactly. If no template is found the bot will stay quiet.
 
-To learn more about Next.js, take a look at the following resources:
+## Set-up in intercom
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+* Deploy to vercel get app URL
+* Create new app @ https://app.intercom.com/a/apps/[APP_ID]/developer-hub
+* Go to created app > webhooks
+* Add webhook [APP_URL]/api/conversations 
+* Only trigger webhook for topic `conversation_part.tag.created`
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The easiest way to deploy the app and allow anyone in the company to change the template files (public/templates directory) is to use the [Vercel Platform](https://vercel.com/import).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
