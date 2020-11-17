@@ -8,6 +8,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "fs": "0.0.1-security",
+    "intercom-client": "^2.11.0",
     "next": "10.0.1",
     "react": "17.0.1",
     "react-dom": "17.0.1"
