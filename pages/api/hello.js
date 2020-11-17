@@ -5,7 +5,7 @@ const intercom_client = new intercom.Client({token: process.env.INTERCOM_API_TOK
 export default async (req, res) => {
   const request_body = req.body;
   if(request_body.type && request_body.type === 'notification_event' && request_body.topic === 'ping'){
-    console.log("webhook test request received");
+    console.log("Webhook Test Request Received");
     res.status(200).end();
   }
   if (request_body.type && request_body.type === 'notification_event' && request_body.topic === 'conversation_part.tag.created') {
